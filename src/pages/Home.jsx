@@ -1,4 +1,3 @@
-import React from 'react';
 import heroImage from '../assets/chip-design.jpg'; // Update this path to where your hero image is stored
 
 const Home = () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../index.css"; // Update the path to src/index.css
 import logo from '../../src/logo.svg'; // TODO: Update this path to where your logo is stored

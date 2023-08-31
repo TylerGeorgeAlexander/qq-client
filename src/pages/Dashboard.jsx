@@ -1,4 +1,3 @@
-import React from 'react';
 import InputChatGPT from '../components/InputChatGPT'; // Import your InputChatGPT component
 
 const Dashboard = () => {

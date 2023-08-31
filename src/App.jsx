@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
-import Home from './pages/Home';
-import Login from './components/Login';
-import RegistrationPage from './pages/RegistrationPage';
-import Dashboard from './pages/Dashboard';
-import LogoutButton from './components/LogoutButton';
-import PrivateWrapper from './components/PrivateWrapper';
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Login from "./components/Login";
+import RegistrationPage from "./pages/RegistrationPage";
+import Dashboard from "./pages/Dashboard";
+import LogoutButton from "./components/LogoutButton";
+import PrivateWrapper from "./components/PrivateWrapper";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [authToken, setAuthToken] = useState('');
+  const [authToken, setAuthToken] = useState("");
   const [tokenExpiration, setTokenExpiration] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedAuthToken = localStorage.getItem('authToken');
-    const storedTokenExpiration = localStorage.getItem('tokenExpiration');
+    const storedAuthToken = localStorage.getItem("authToken");
+    const storedTokenExpiration = localStorage.getItem("tokenExpiration");
 
-    if (storedAuthToken && storedTokenExpiration && new Date(storedTokenExpiration) > new Date()) {
+    if (
+      storedAuthToken &&
+      storedTokenExpiration &&
+      new Date(storedTokenExpiration) > new Date()
+    ) {
       setIsLoggedIn(true);
       setAuthToken(storedAuthToken);
       setTokenExpiration(storedTokenExpiration);
@@ -34,25 +38,25 @@ function App() {
 
   const handleLogin = (authTokenFromBackend) => {
     try {
-      const decodedToken = JSON.parse(atob(authTokenFromBackend.split('.')[1]));
+      const decodedToken = JSON.parse(atob(authTokenFromBackend.split(".")[1]));
       const expirationTime = new Date(decodedToken.exp * 1000);
 
-      localStorage.setItem('authToken', authTokenFromBackend);
-      localStorage.setItem('tokenExpiration', expirationTime.toISOString());
+      localStorage.setItem("authToken", authTokenFromBackend);
+      localStorage.setItem("tokenExpiration", expirationTime.toISOString());
 
       setIsLoggedIn(true);
       setAuthToken(authTokenFromBackend);
       setTokenExpiration(expirationTime.toISOString());
     } catch (error) {
-      console.error('Error handling login:', error);
+      console.error("Error handling login:", error);
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('tokenExpiration');
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("tokenExpiration");
     setIsLoggedIn(false);
-    setAuthToken('');
+    setAuthToken("");
     setTokenExpiration(null);
   };
 
@@ -83,10 +87,7 @@ function App() {
                 </>
               ) : (
                 <li>
-                  <Link
-                    to="/login"
-                    className="text-gray-300 hover:text-white"
-                  >
+                  <Link to="/login" className="text-gray-300 hover:text-white">
                     Login
                   </Link>
                 </li>

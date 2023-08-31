@@ -1,5 +1,3 @@
-import React from 'react';
-
 const LogoutButton = ({ onLogout }) => {
   const handleLogout = () => {
     // Call the onLogout callback to handle the logout action
