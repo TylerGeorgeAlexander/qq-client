@@ -27,7 +27,7 @@ const InputChatGPT = () => {
   const fetchSearchHistory = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/users/search-history`,
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history`,
         {
           method: "GET",
           headers: {
@@ -93,7 +93,7 @@ const InputChatGPT = () => {
   const updateSearchHistory = async (query, assertion, title) => {
     try {
       await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/users/search-history`,
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history`,
         {
           method: "POST",
           body: JSON.stringify({ query, assertion, title }),
@@ -121,7 +121,7 @@ const InputChatGPT = () => {
       };
 
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/users/chat`,
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/chat`,
         {
           method: "POST",
           body: JSON.stringify(requestData),
@@ -149,7 +149,7 @@ const InputChatGPT = () => {
   const restoreSearch = async (searchId) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/users/search-history/${searchId}`,
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history/${searchId}`,
         {
           method: "GET",
           headers: {
@@ -174,7 +174,7 @@ const InputChatGPT = () => {
   const updateTitle = async (searchId, title) => {
     try {
       await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/users/search-history/${searchId}`,
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history/${searchId}`,
         {
           method: "PUT",
           body: JSON.stringify({ title }),
@@ -194,7 +194,7 @@ const InputChatGPT = () => {
   const deleteUserSearchHistory = async (searchId) => {
     try {
       await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/users/search-history/${searchId}`,
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history/${searchId}`,
         {
           method: "DELETE",
           headers: {

@@ -58,7 +58,7 @@ const Login = ({ onLogin }) => {
   const handleLogin = async () => {
     // Send the login data to the server
     try {
-      const response = await fetch("http://localhost:2121/api/users/login", {
+      const response = await fetch("https://quickquestion-server-52abd9886244.herokuapp.com/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
