@@ -14,6 +14,7 @@ const FlashCardPage = () => {
             query={card.query}
             assertion={card.assertion}
             timestamp={card.timestamp}
+            searchId={card.searchId} // Pass the searchId as a prop
           />
         ))}
       </div>
@@ -22,3 +23,4 @@ const FlashCardPage = () => {
 };
 
 export default FlashCardPage;
+
