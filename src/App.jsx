@@ -7,6 +7,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import Dashboard from "./pages/Dashboard";
 import LogoutButton from "./components/LogoutButton";
 import PrivateWrapper from "./components/PrivateWrapper";
+import FlashCardPage from "./pages/FlashCardPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -75,6 +76,14 @@ function App() {
                 <>
                   <li>
                     <Link
+                      to="/flash-cards"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      Flash Cards
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       to="/dashboard"
                       className="text-gray-300 hover:text-white"
                     >
@@ -104,6 +113,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login onLogin={handleLogin} />} />
               <Route path="/registration" element={<RegistrationPage />} />
+              <Route path="/flash-cards" element={<FlashCardPage />} />
               <Route
                 path="/dashboard"
                 element={
