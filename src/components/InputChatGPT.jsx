@@ -28,6 +28,38 @@ const InputChatGPT = () => {
   const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
   const { searchId } = useParams();
 
+  const addQuestionToDeck = async (questionData) => {
+    try {
+      const response = await fetch(
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/decks/${deckId}/add-search-history`,
+        {
+          method: "POST",
+          body: JSON.stringify(questionData),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to add question to deck");
+      }
+      // Handle success or any updates needed
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleAddToDeckClick = () => {
+    if (input && output) {
+      const questionData = {
+        question: input,
+        assertion: output,
+      };
+      addQuestionToDeck(questionData);
+    }
+  };
+
   const fetchSearchHistory = async () => {
     try {
       const response = await fetch(
