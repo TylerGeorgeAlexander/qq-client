@@ -1,3 +1,4 @@
+// components/InputChatGPT.jsx
 import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ import {
 import { AiFillEdit, AiFillSave } from "react-icons/ai";
 import { FiTrash2, FiCheck, FiX, FiPlus } from "react-icons/fi"; // <-- import the new icons
 import FlashCard from "./FlashCard";
+import LoadingSpinner from "./LoadingSpinner"; // Import your loading spinner component
 
 const InputChatGPT = () => {
   const [input, setInput] = useState("");
@@ -23,6 +25,7 @@ const InputChatGPT = () => {
   const [showConfirmation, setShowConfirmation] = useState(null); // New state for confirmation dialog
   const inputRef = useRef(null); // Ref for the input element
   const [selectedSearch, setSelectedSearch] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
 
   const fetchSearchHistory = async () => {
     try {
@@ -113,9 +116,9 @@ const InputChatGPT = () => {
   const handleChange = (event) => {
     setInput(event.target.value);
   };
-// TODO: create loading spinner on the return render to show server response delay
   const handleClick = async () => {
     try {
+      setIsLoading(true); // Start loading indicator
       const requestData = {
         input: input,
       };
@@ -143,6 +146,8 @@ const InputChatGPT = () => {
       console.error(error);
       // Redirect to login if unauthorized or error occurs
       navigate("/login");
+    } finally {
+      setIsLoading(false); // Stop loading indicator
     }
   };
 
@@ -397,8 +402,9 @@ const InputChatGPT = () => {
                 <button
                   className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   onClick={handleClick}
+                  disabled={isLoading} // Disable the button while loading
                 >
-                  Generate
+                  {isLoading ? <LoadingSpinner /> : "Generate"} {/* Display loading spinner or "Generate" text */}
                 </button>
                 <div className="prose">
                   <ReactMarkdown>{`${output}`}</ReactMarkdown>
