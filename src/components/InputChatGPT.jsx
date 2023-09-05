@@ -1,7 +1,7 @@
 // components/InputChatGPT.jsx
 import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   BsLayoutSidebarInset,
   BsLayoutSidebarInsetReverse,
@@ -26,6 +26,7 @@ const InputChatGPT = () => {
   const inputRef = useRef(null); // Ref for the input element
   const [selectedSearch, setSelectedSearch] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
+  const { searchId } = useParams();
 
   const fetchSearchHistory = async () => {
     try {
@@ -87,7 +88,6 @@ const InputChatGPT = () => {
     }
   };
 
-
   useEffect(() => {
     fetchSearchHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -142,6 +142,8 @@ const InputChatGPT = () => {
 
       // Update search history
       updateSearchHistory(input, data.output, input);
+      // Update repetition interval for the current searchId
+      updateRepetitionIntervalBySearchId(searchId);
     } catch (error) {
       console.error(error);
       // Redirect to login if unauthorized or error occurs
@@ -222,6 +224,28 @@ const InputChatGPT = () => {
     setActiveSearchIndex(null); // Deselect the current title
   };
 
+  const updateRepetitionIntervalBySearchId = async (searchId) => {
+    try {
+      const response = await fetch(
+        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history/${searchId}/repetition-interval`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update repetition interval");
+      }
+      // Handle success
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
+  };
+
   useEffect(() => {
     if (editingTitleIndex !== null) {
       // Focus the input box when editingTitleIndex changes
@@ -243,10 +267,10 @@ const InputChatGPT = () => {
     <div className="flex">
       {/* Sidebar */}
       <div
-        className={`bg-gray-100 transition-all ease-in-out duration-300 ${isSidebarVisible ? "w-64" : "w-16 bg-white"
-          }`}
-          style={{ height: `calc(100vh - 4rem)` }} // Adjust the height based on your navbar's height
-    
+        className={`bg-gray-100 transition-all ease-in-out duration-300 ${
+          isSidebarVisible ? "w-64" : "w-16 bg-white"
+        }`}
+        style={{ height: `calc(100vh - 4rem)` }} // Adjust the height based on your navbar's height
       >
         {/* Toggle sidebar button */}
         <div className="p-4 flex justify-center items-center">
@@ -277,19 +301,20 @@ const InputChatGPT = () => {
             {searchHistory.map((search, index) => (
               <React.Fragment key={index}>
                 {index === 0 ||
-                  search.relativeTime !==
+                search.relativeTime !==
                   searchHistory[index - 1].relativeTime ? (
                   <div className="text-gray-500 mb-2">
                     {search.relativeTime}
                   </div>
                 ) : null}
                 <div
-                  className={`flex items-center justify-between mb-2 p-2 rounded transition-colors duration-200 ${editingTitleIndex === index
+                  className={`flex items-center justify-between mb-2 p-2 rounded transition-colors duration-200 ${
+                    editingTitleIndex === index
                       ? "bg-blue-100"
                       : activeSearchIndex === index
-                        ? "bg-gray-300"
-                        : "hover:bg-gray-200"
-                    }`}
+                      ? "bg-gray-300"
+                      : "hover:bg-gray-200"
+                  }`}
                 >
                   <div className="flex items-center">
                     {showConfirmation === index && (
@@ -404,7 +429,8 @@ const InputChatGPT = () => {
                   onClick={handleClick}
                   disabled={isLoading} // Disable the button while loading
                 >
-                  {isLoading ? <LoadingSpinner /> : "Generate"} {/* Display loading spinner or "Generate" text */}
+                  {isLoading ? <LoadingSpinner /> : "Generate"}{" "}
+                  {/* Display loading spinner or "Generate" text */}
                 </button>
                 <div className="prose">
                   <ReactMarkdown>{`${output}`}</ReactMarkdown>
@@ -428,7 +454,6 @@ const InputChatGPT = () => {
       </div>
     </div>
   );
-
 };
 
 export default InputChatGPT;
