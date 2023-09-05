@@ -113,7 +113,7 @@ const InputChatGPT = () => {
   const handleChange = (event) => {
     setInput(event.target.value);
   };
-
+// TODO: create loading spinner on the return render to show server response delay
   const handleClick = async () => {
     try {
       const requestData = {
