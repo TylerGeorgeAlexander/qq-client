@@ -8,7 +8,7 @@ import {
 } from "react-icons/bs";
 import { AiFillEdit, AiFillSave } from "react-icons/ai";
 import { FiTrash2, FiCheck, FiX, FiPlus } from "react-icons/fi"; // <-- import the new icons
-import FlashCard from "./FlashCard";
+import InfoCard from "./InfoCard";
 import LoadingSpinner from "./LoadingSpinner"; // Import your loading spinner component
 
 const InputChatGPT = () => {
@@ -203,7 +203,7 @@ const InputChatGPT = () => {
       const search = await response.json();
       setInput(search.query);
       setOutput(search.assertion);
-      // Set the selected search for FlashCard
+      // Set the selected search for InfoCard
       setSelectedSearch(search);
     } catch (error) {
       console.error(error);
@@ -475,7 +475,7 @@ const InputChatGPT = () => {
         {/* Flash Card section */}
         {selectedSearch && (
           <div className="px-4 py-6 flex-1">
-            <FlashCard
+            <InfoCard
               title={selectedSearch.title || selectedSearch.query}
               query={selectedSearch.query}
               assertion={selectedSearch.assertion}
