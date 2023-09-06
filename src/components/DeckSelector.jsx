@@ -48,7 +48,7 @@ const DeckSelector = ({ setSelectedDeck }) => {
                 onChange={(e) => handleDeckSelection(e.target.value)}
             >
                 <option value="">Select a deck...</option>
-                {decks.map((deck) => (
+                {decks && decks.map((deck) => (
                     <option key={deck._id} value={deck._id}>
                         {deck.name}
                     </option>
