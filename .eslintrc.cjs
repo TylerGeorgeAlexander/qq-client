@@ -1,27 +1,20 @@
 module.exports = {
-  parser: '@babel/eslint-parser', // Use Babel parser for modern JavaScript syntax
+  root: true,
+  env: { browser: true, es2020: true },
   extends: [
-    'eslint:recommended', // Use ESLint recommended rules
-    'plugin:react/recommended', // Use React recommended rules
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
   ],
-  plugins: ['react'], // Enable the React plugin
-  env: {
-    browser: true, // Enable browser environment
-    es2021: true, // Allow ES2021 features
-  },
-  parserOptions: {
-    ecmaVersion: 2021, // Use ES2021
-    sourceType: 'module', // Use ECMAScript modules
-    ecmaFeatures: {
-      jsx: true, // Enable JSX parsing
-    },
-  },
-  settings: {
-    react: {
-      version: 'detect', // Automatically detect React version
-    },
-  },
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
+  plugins: ['react-refresh'],
   rules: {
-    // Add your project-specific ESLint rules here
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
   },
-};
+}
