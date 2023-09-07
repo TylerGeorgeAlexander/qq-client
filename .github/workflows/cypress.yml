@@ -6,21 +6,23 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
       - name: Install dependencies
         run: npm install
 
-      - name: Start development server
-        run: npm build & npm start
-
-      - name: Wait for the server to start
-        run: sleep 30
+      - name: Build the application
+        run: npm run build
 
       - name: Run Cypress tests
         run: npx cypress run --config baseUrl=http://localhost:3000
