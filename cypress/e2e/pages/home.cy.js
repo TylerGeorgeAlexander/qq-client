@@ -3,7 +3,7 @@
 describe('Home Component', () => {
     beforeEach(() => {
       // Visit the home page or set the URL where your Home component is rendered
-      cy.visit('http://localhost:3000/');
+      cy.visit('http://localhost:3000/'|| 'https://quickquestion-client-ab1c2fa4677d.herokuapp.com/');
     });
   
     it('should display the hero image', () => {
