@@ -15,7 +15,7 @@ const Home = () => {
       <div className="max-w-3xl mx-auto p-8">
         <h2 className="text-2xl font-bold mb-4">What is Chat GPT API Generator?</h2>
         <p className="mb-4">
-          Chat GPT API Generator is an innovative tool designed to enable developers to seamlessly integrate OpenAI's ChatGPT model into their applications. With a user-friendly interface, you can customize and generate the necessary API code for your project.
+          Chat GPT API Generator is an innovative tool designed to enable developers to seamlessly integrate OpenAI&apos;s ChatGPT model into their applications. With a user-friendly interface, you can customize and generate the necessary API code for your project.
         </p>
         <h2 className="text-2xl font-bold mb-4">Features</h2>
         <ul className="list-disc list-inside mb-4">
@@ -25,7 +25,7 @@ const Home = () => {
         </ul>
         <h2 className="text-2xl font-bold mb-4">Getting Started</h2>
         <p className="mb-4">
-          To get started, navigate to the Dashboard. There, you'll find various options to tailor ChatGPT to your project and generate the API code. Once you have customized the settings to your liking, click the 'Generate' button to obtain the code snippet. You can then easily integrate it into your application.
+          To get started, navigate to the Dashboard. There, you&apos;ll find various options to tailor ChatGPT to your project and generate the API code. Once you have customized the settings to your liking, click the &lsquo;Generate&lsquo; button to obtain the code snippet. You can then easily integrate it into your application.
         </p>
       </div>
     </div>
