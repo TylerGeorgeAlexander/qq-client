@@ -25,4 +25,4 @@ jobs:
         run: npm run build
 
       - name: Run Cypress tests
-        run: npx cypress run --config baseUrl=http://localhost:3000
+        run: npx cypress run --config baseUrl=https://quickquestion-client-ab1c2fa4677d.herokuapp.com/
