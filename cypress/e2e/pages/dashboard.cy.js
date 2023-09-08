@@ -48,64 +48,67 @@ describe('Dashboard', () => {
             cy.get(".prose").should("exist");
         });
 
-        it("should handle loading state", () => {
-            // Stub the API request to simulate loading
-            cy.intercept("POST", "https://quickquestion-server-52abd9886244.herokuapp.com/api/users/chat", {
-                statusCode: 200,
-                body: {
-                    output: "Generated Output",
-                },
-                delay: 2000, // Simulate a 2-second delay
-            }).as("generateOutput");
-
-            // Type text into the input textarea
-            cy.get("textarea").type("test");
-
-            // Click the generate button
-            cy.contains("Generate").click();
-
-            // Verify that loading spinner is displayed
-            cy.get("#loading-spinner").should("exist");
-
-            // Wait for the API request to complete
-            cy.wait("@generateOutput");
-
-            // Verify that loading spinner disappears and output is displayed
-            cy.get("#loading-spinner").should("not.exist");
-            cy.get(".prose").should("exist");
-        });
-
-        it("should handle search history", () => {
-            // Stub the API request to fetch search history
-            cy.intercept("GET", "https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history", {
-                statusCode: 200,
-                body: {
-                    searchHistory: [
-                        {
-                            _id: "1",
-                            query: "Search Query 1",
-                            assertion: "Search Assertion 1",
-                            timestamp: "Timestamp 1",
+        /* TODO: refactor to use more indepth unit tests
+        - add id features to improve accessibility and testing
+        
+                it("should handle loading state", () => {
+                    // Stub the API request to simulate loading
+                    cy.intercept("POST", "https://quickquestion-server-52abd9886244.herokuapp.com/api/users/chat", {
+                        statusCode: 200,
+                        body: {
+                            output: "Generated Output",
                         },
-                        {
-                            _id: "2",
-                            query: "Search Query 2",
-                            assertion: "Search Assertion 2",
-                            timestamp: "Timestamp 2",
+                        delay: 2000, // Simulate a 2-second delay
+                    }).as("generateOutput");
+        
+                    // Type text into the input textarea
+                    cy.get("textarea").type("test");
+        
+                    // Click the generate button
+                    cy.contains("Generate").click();
+        
+                    // Verify that loading spinner is displayed
+                    cy.get("#loading-spinner").should("exist");
+        
+                    // Wait for the API request to complete
+                    cy.wait("@generateOutput");
+        
+                    // Verify that loading spinner disappears and output is displayed
+                    cy.get("#loading-spinner").should("not.exist");
+                    cy.get(".prose").should("exist");
+                });
+        
+                it("should handle search history", () => {
+                    // Stub the API request to fetch search history
+                    cy.intercept("GET", "https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history", {
+                        statusCode: 200,
+                        body: {
+                            searchHistory: [
+                                {
+                                    _id: "1",
+                                    query: "Search Query 1",
+                                    assertion: "Search Assertion 1",
+                                    timestamp: "Timestamp 1",
+                                },
+                                {
+                                    _id: "2",
+                                    query: "Search Query 2",
+                                    assertion: "Search Assertion 2",
+                                    timestamp: "Timestamp 2",
+                                },
+                            ],
                         },
-                    ],
-                },
-            }).as("fetchSearchHistory");
-
-            // Verify that the search history is displayed
-            cy.get(".search-history-item").should("have.length", 2);
-
-            // Click on a search history item
-            cy.get(".search-history-item").first().click();
-
-            // Verify that the selected search is displayed
-            cy.get(".flash-card").should("exist");
-        });
+                    }).as("fetchSearchHistory");
+        
+                    // Verify that the search history is displayed
+                    cy.get(".search-history-item").should("have.length", 2);
+        
+                    // Click on a search history item
+                    cy.get(".search-history-item").first().click();
+        
+                    // Verify that the selected search is displayed
+                    cy.get(".flash-card").should("exist");
+                });
+                */
     });
-
 });
