@@ -7,9 +7,9 @@ import {
   BsLayoutSidebarInsetReverse,
 } from "react-icons/bs";
 import { AiFillEdit, AiFillSave } from "react-icons/ai";
-import { FiTrash2, FiCheck, FiX, FiPlus } from "react-icons/fi"; // <-- import the new icons
+import { FiTrash2, FiCheck, FiX, FiPlus } from "react-icons/fi";
 import InfoCard from "./InfoCard";
-import LoadingSpinner from "./LoadingSpinner"; // Import your loading spinner component
+import LoadingSpinner from "./LoadingSpinner";
 
 const InputChatGPT = () => {
   const [input, setInput] = useState("");
@@ -296,7 +296,7 @@ const InputChatGPT = () => {
   }, [editingTitleIndex]);
 
   return (
-    <div id="InputChatGPT">
+    <div id="InputChatGPT" className="flex">
       {/* Sidebar */}
       <div
         className={`bg-gray-100 transition-all ease-in-out duration-300 ${

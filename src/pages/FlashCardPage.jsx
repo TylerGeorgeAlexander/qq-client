@@ -7,6 +7,7 @@ const FlashCardPage = () => {
   const [selectedDeck, setSelectedDeck] = useState(null);
   const [searchHistory, setSearchHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUnderConstruction, setIsUnderConstruction] = useState(true); // TODO: add features
 
   useEffect(() => {
     if (selectedDeck) {
@@ -40,29 +41,43 @@ const FlashCardPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="w-full max-w-md">
-        <h1 className="text-2xl font-semibold mb-4">Flash Cards</h1>
-        <DeckSelector setSelectedDeck={setSelectedDeck} /> {/* Use your DeckSelector component */}
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <div className="flex flex-col items-center">
-            {searchHistory.map((searchEntry) => (
-              <FlashCard
-                key={searchEntry._id}
-                title={searchEntry.title}
-                query={searchEntry.query}
-                assertion={searchEntry.assertion}
-                timestamp={searchEntry.timestamp}
-                searchId={searchEntry._id}
-              />
-            ))}
+    <>
+      {isUnderConstruction ? (
+        <div className="flex justify-center items-center h-screen">
+          <div className="w-full max-w-md">
+            <h1 className="text-2xl font-semibold mb-4">
+              Flash Cards (Under Construction)
+            </h1>
+            <p>This feature is currently under construction. Check back later for updates!</p>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <div className="w-full max-w-md">
+            <h1 className="text-2xl font-semibold mb-4">Flash Cards</h1>
+            <DeckSelector setSelectedDeck={setSelectedDeck} /> {/* Use your DeckSelector component */}
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <div className="flex flex-col items-center">
+                {searchHistory.map((searchEntry) => (
+                  <FlashCard
+                    key={searchEntry._id}
+                    title={searchEntry.title}
+                    query={searchEntry.query}
+                    assertion={searchEntry.assertion}
+                    timestamp={searchEntry.timestamp}
+                    searchId={searchEntry._id}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
+  
 };
 
 export default FlashCardPage;
