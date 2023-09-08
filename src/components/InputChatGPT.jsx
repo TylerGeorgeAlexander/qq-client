@@ -296,7 +296,7 @@ const InputChatGPT = () => {
   }, [editingTitleIndex]);
 
   return (
-    <div className="flex">
+    <div id="InputChatGPT">
       {/* Sidebar */}
       <div
         className={`bg-gray-100 transition-all ease-in-out duration-300 ${
@@ -457,6 +457,7 @@ const InputChatGPT = () => {
                   onChange={handleChange}
                 />
                 <button
+                  data-cy="generate-button"
                   className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   onClick={handleClick}
                   disabled={isLoading} // Disable the button while loading
