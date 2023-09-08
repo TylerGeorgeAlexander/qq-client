@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Quick Question: ChatGPT Clone with Spaced Interval Flashcards
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The **Quick Question** Vite app is a ChatGPT clone with a twist – it incorporates spaced interval flashcards for effective learning based on the principles of spaced repetition. Quick Question helps you learn and retain information more efficiently.
 
-## Available Scripts
+## How Quick Question Works
 
-In the project directory, you can run:
+Quick Question leverages the power of memory intervals to reinforce your learning over time, a concept popularized by Dr. Barbara Oakley's "Learning How to Learn" course and book:
 
-### `npm start`
+- **Dr. Barbara Oakley's Insights**: Inspired by the teachings of [Dr. Barbara Oakley](https://barbaraoakley.com/books/learning-how-to-learn/) in her "Learning How to Learn" course on [Coursera](https://www.coursera.org/learn/learning-how-to-learn/), Quick Question employs research-backed learning techniques.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Here's how it works:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Initial Learning (Day 0)**: Start by learning new material as you normally would, focusing on understanding the content.
 
-### `npm test`
+2. **First Repetition (Day 1)**: The next day (ideally within 12 to 24 hours), return to the study material and review it briefly. Since you still remember most of it, this review only takes 5-10 minutes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. **Second Repetition (Day 3)**: After three days, revisit the material. If you still remember it well, proceed to the next step.
 
-### `npm run build`
+4. **Subsequent Intervals**: Continue the spaced repetition with intervals such as 7 days, 21 days, 30 days, 45 days, and finally, 60 days. These intervals are carefully designed to optimize memory retention.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+By spacing out your repetitions over time, your brain recognizes the importance of the information, a technique highlighted by [CzechUniversities](https://www.czechuniversities.com/article/study-skills-7-spaced-repetition#:~:text=Ideal%20intervals%20are%20as%20follows,into%20your%20long%2Dterm%20memory), and stores it in your long-term memory. When you actively use this knowledge, it becomes nearly impossible to forget.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features of Quick Question
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Chat with AI**: Engage in text-based conversations with the AI model, similar to OpenAI's GPT-3.
 
-### `npm run eject`
+- **Generate Content**: Use Quick Question to generate content, summaries, or answers to your questions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Spaced Interval Flashcards**: Create flashcards with spaced repetition intervals to aid in your learning and retention.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Customizable Intervals**: Tailor the repetition intervals to match your learning needs.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Effective Learning**: Maximize your study efficiency and long-term knowledge retention.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Getting Started
 
-## Learn More
+1. **Clone the Repository**: Start by cloning this repository to your local machine.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. **Backend Server**: Quick Question relies on a backend server. You can find the server's source code and setup instructions on [GitHub](https://github.com/TylerGeorgeAlexander/qq-server).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. **Install Dependencies**: Navigate to the project directory and run `npm install` or `yarn install` to install the necessary dependencies.
 
-### Code Splitting
+4. **Run the App**: Launch the app using `npm run dev` or `yarn dev`. The app will be available at `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+5. **Explore and Learn**: Begin your learning journey with Quick Question by chatting with the AI, generating content, and creating spaced interval flashcards.
 
-### Analyzing the Bundle Size
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+We welcome contributions to enhance Quick Question, the ChatGPT clone with spaced interval flashcards. Feel free to open issues, suggest improvements, or submit pull requests.
 
-### Making a Progressive Web App
+## Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Quick Question was inspired by the valuable insights of Dr. Barbara Oakley and the research on spaced repetition by CzechUniversities. It's a valuable tool for anyone looking to optimize their learning and memory retention.
 
-### Advanced Configuration
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is licensed under the [MIT License](LICENSE).
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Happy learning and chatting with Quick Question!
