@@ -65,13 +65,13 @@ describe('Dashboard', () => {
             cy.contains("Generate").click();
 
             // Verify that loading spinner is displayed
-            cy.get(".loading-spinner").should("exist");
+            cy.get("#loading-spinner").should("exist");
 
             // Wait for the API request to complete
             cy.wait("@generateOutput");
 
             // Verify that loading spinner disappears and output is displayed
-            cy.get(".loading-spinner").should("not.exist");
+            cy.get("#loading-spinner").should("not.exist");
             cy.get(".prose").should("exist");
         });
 
