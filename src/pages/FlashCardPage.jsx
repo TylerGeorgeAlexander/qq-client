@@ -5,17 +5,17 @@ import LoadingSpinner from "../components/LoadingSpinner";
 
 const FlashCardPage = () => {
   const [selectedDeck, setSelectedDeck] = useState(null);
-  const [searchHistory, setSearchHistory] = useState([]);
+  const [questions, setQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isUnderConstruction, setIsUnderConstruction] = useState(true); // TODO: add features
+  const [isUnderConstruction, setIsUnderConstruction] = useState(false); // TODO: add features
 
   useEffect(() => {
     if (selectedDeck) {
-      fetchSearchHistory(selectedDeck._id);
+      fetchQuestions(selectedDeck._id);
     }
   }, [selectedDeck]);
 
-  const fetchSearchHistory = async (deckId) => {
+  const fetchQuestions = async (deckId) => {
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -29,10 +29,10 @@ const FlashCardPage = () => {
         }
       );
       if (!response.ok) {
-        throw new Error("Failed to fetch search history");
+        throw new Error("Failed to fetch questions");
       }
       const data = await response.json();
-      setSearchHistory(data.searchHistory);
+      setQuestions(data.searchHistory);
     } catch (error) {
       console.error(error);
     } finally {
@@ -60,16 +60,9 @@ const FlashCardPage = () => {
               <LoadingSpinner />
             ) : (
               <div className="flex flex-col items-center">
-                {searchHistory.map((searchEntry) => (
-                  <FlashCard
-                    key={searchEntry._id}
-                    title={searchEntry.title}
-                    query={searchEntry.query}
-                    assertion={searchEntry.assertion}
-                    timestamp={searchEntry.timestamp}
-                    searchId={searchEntry._id}
-                  />
-                ))}
+                {questions.length > 0 && (
+                  <FlashCard questions={questions} />
+                )}
               </div>
             )}
           </div>
@@ -77,7 +70,6 @@ const FlashCardPage = () => {
       )}
     </>
   );
-  
 };
 
 export default FlashCardPage;

@@ -20,23 +20,25 @@ const FlashCard = ({ questions }) => {
     setSelectedResponse(response);
     // Make API request to update repetition interval based on selected response
     try {
-      // Use selectedQuestionIndex to get the selected question from the array
-      const selectedQuestion = questions[selectedQuestionIndex];
-      const apiResponse = await fetch(
-        `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history/${selectedQuestion.searchId}/repetition-interval`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-          body: JSON.stringify({ response }),
+      if (selectedQuestionIndex !== null) {
+        // Use selectedQuestionIndex to get the selected question from the array
+        const selectedQuestion = questions[selectedQuestionIndex];
+        const apiResponse = await fetch(
+          `https://quickquestion-server-52abd9886244.herokuapp.com/api/users/search-history/${selectedQuestion.searchId}/repetition-interval`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+            body: JSON.stringify({ response }),
+          }
+        );
+        if (!apiResponse.ok) {
+          throw new Error("Failed to update repetition interval");
         }
-      );
-      if (!apiResponse.ok) {
-        throw new Error("Failed to update repetition interval");
+        // Handle successful update
       }
-      // Handle successful update
     } catch (error) {
       console.error(error);
     }

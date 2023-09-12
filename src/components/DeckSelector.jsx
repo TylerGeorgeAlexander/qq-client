@@ -24,7 +24,7 @@ const DeckSelector = ({ setSelectedDeck }) => {
                 throw new Error("Failed to fetch decks");
             }
             const data = await response.json();
-            setDecks(data.decks);
+            setDecks(data);
         } catch (error) {
             console.error(error);
         }
