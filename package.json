@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "base": "https://quickquestion-client-ab1c2fa4677d.herokuapp.com/", // Set your desired base URL here
   "scripts": {
     "dev": "vite",
     "build": "vite build",
