@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 
 const DeckSelector = ({ setSelectedDeck }) => {
     const [decks, setDecks] = useState([]);
@@ -57,5 +58,9 @@ const DeckSelector = ({ setSelectedDeck }) => {
         </div>
     );
 };
+
+DeckSelector.propTypes = {
+    setSelectedDeck: PropTypes.func.isRequired,
+  };
 
 export default DeckSelector;
