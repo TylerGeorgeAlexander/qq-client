@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../index.css"; // Update the path to src/index.css
 import logo from '../../src/logo.svg'; // TODO: Update this path to where your logo is stored
+import PropTypes from 'prop-types';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -163,6 +164,10 @@ const Login = ({ onLogin }) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
 };
 
 export default Login;

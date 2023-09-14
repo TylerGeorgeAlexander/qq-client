@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 
 const FlashCard = ({ questions }) => {
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
@@ -100,6 +101,10 @@ const FlashCard = ({ questions }) => {
       )}
     </div>
   );
+};
+
+FlashCard.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default FlashCard;

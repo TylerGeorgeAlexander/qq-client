@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const LogoutButton = ({ onLogout }) => {
   const handleLogout = () => {
     // Call the onLogout callback to handle the logout action
@@ -12,6 +14,10 @@ const LogoutButton = ({ onLogout }) => {
       Logout
     </button>
   );
+};
+
+LogoutButton.propTypes = {
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default LogoutButton;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import DeckSelector from "../components/DeckSelector"; // Import the DeckSelector component
 import FlashCard from "../components/FlashCard"; // Import the FlashCard component
 import LoadingSpinner from "../components/LoadingSpinner";

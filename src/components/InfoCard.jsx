@@ -1,4 +1,5 @@
 // InfoCard.js
+import PropTypes from 'prop-types';
 
 const InfoCard = ({ title, query, assertion, timestamp }) => {
     return (
@@ -11,4 +12,11 @@ const InfoCard = ({ title, query, assertion, timestamp }) => {
     );
 };
 
+InfoCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    query: PropTypes.string.isRequired,
+    assertion: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
+  };
+  
 export default InfoCard;
