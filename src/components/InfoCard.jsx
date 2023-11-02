@@ -16,7 +16,7 @@ InfoCard.propTypes = {
     title: PropTypes.string.isRequired,
     query: PropTypes.string.isRequired,
     assertion: PropTypes.string.isRequired,
-    timestamp: PropTypes.number.isRequired,
+    timestamp: PropTypes.string.isRequired,
   };
   
 export default InfoCard;
