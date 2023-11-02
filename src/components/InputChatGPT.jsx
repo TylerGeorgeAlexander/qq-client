@@ -28,13 +28,14 @@ const InputChatGPT = () => {
   const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
   const { searchId } = useParams();
 
-  const addQuestionToDeck = async (questionData) => {
+  const addQuestionToDeck = async (searchHistoryId, deckId) => {
+    console.log("🚀 ~ file: InputChatGPT.jsx:32 ~ addQuestionToDeck ~ searchHistoryId:", searchHistoryId)
     try {
       const response = await fetch(
         `https://quickquestion-server-52abd9886244.herokuapp.com/api/decks/${deckId}/add-search-history`,
         {
           method: "POST",
-          body: JSON.stringify(questionData),
+          body: JSON.stringify({ searchHistoryId }), // Pass searchHistoryId
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -50,13 +51,63 @@ const InputChatGPT = () => {
     }
   };
 
+  // New state variables for deck selection
+  const [deckId, setDeckId] = useState(""); // Selected deck ID
+  const [decks, setDecks] = useState([]); // List of available decks
+
+  // New state variables for dropdown menu
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [selectedDeck, setSelectedDeck] = useState("");
+
+  // Function to toggle the dropdown menu visibility
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  // Function to handle deck selection from the dropdown menu
+  const handleDeckSelect = async (deckId) => {
+    setSelectedDeck(deckId);
+    setDeckId(deckId)
+    handleAddToDeckClick(); // Invoke the Add to Deck function TODO: possible rename
+    toggleDropdown(); // Close the dropdown after selecting a deck
+  };
+
+  // Fetch the list of decks when the component mounts
+  useEffect(() => {
+    const fetchDecks = async () => {
+      try {
+        const response = await fetch(
+          "https://quickquestion-server-52abd9886244.herokuapp.com/api/decks",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch decks");
+        }
+        const data = await response.json();
+        setDecks(data);
+      } catch (error) {
+        console.error(error);
+        // Handle error or redirect as needed
+      }
+    };
+
+    fetchDecks();
+  }, []);
+
   const handleAddToDeckClick = () => {
-    if (input && output) {
-      const questionData = {
-        question: input,
-        assertion: output,
-      };
-      addQuestionToDeck(questionData);
+    if (input && output && selectedDeck) {
+      if (selectedSearch) {
+        // If selectedSearch exists, add its search history ID to the deck
+        addQuestionToDeck(selectedSearch._id, selectedDeck);
+      } else {
+        // Handle the case where there is no selected search
+      }
     }
   };
 
@@ -476,6 +527,37 @@ const InputChatGPT = () => {
         {/* Flash Card section */}
         {selectedSearch && (
           <div className="px-4 py-6 flex-1">
+            {/* Dropdown menu */}
+            <div className="relative inline-block text-left">
+              <button
+                onClick={toggleDropdown}
+                className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                Add to Deck
+              </button>
+              {isDropdownVisible && (
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div
+                    className="py-1"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="options-menu"
+                  >
+                    {decks?.map((deck) => (
+                      <button
+                        key={deck._id}
+                        onClick={() => handleDeckSelect(deck._id)}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        role="menuitem"
+                      >
+                        {deck.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* InfoCard */}
             <InfoCard
               title={selectedSearch.title || selectedSearch.query}
               query={selectedSearch.query}
